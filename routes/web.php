@@ -5,6 +5,7 @@ use App\Http\Controllers\AplicationController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\InformeBiopsiaController;
 use App\Http\Controllers\SolicitudPabellonController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,11 @@ Route::post('get-solicitudes', [PacienteController::class, 'getSolicitudes']);
 
 Route::prefix('api')->group(function () {
     Route::get('/detalle/{id}', [SolicitudPabellonController::class, 'detalle']);
+    Route::get('/get-info', [UserController::class, 'getInfoCreateUser']);
 });
+
+Route::prefix('user')->group(function () {
+    Route::post('/registrar', [UserController::class, 'store']);
+});
+
+Route::post('get-fonasa', [UserController::class, 'getFonasa']);

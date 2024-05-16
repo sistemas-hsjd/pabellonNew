@@ -27,4 +27,9 @@ class Medico extends Model
     {
         return "{$this->pro_rut}-{$this->pro_digito}";
     }
+
+    public function labores()
+    {
+        return $this->belongsToMany(\App\Models\Labor::class, 'cb_medico_cod_ncr', 'pro_cod', 'tla_cod', 'pro_cod', 'cod_car');
+    }
 }

@@ -3,9 +3,13 @@
 namespace App\Policies;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session; // Importa la clase Session
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
+    use HandlesAuthorization;
+    
     /**
      * Create a new policy instance.
      */

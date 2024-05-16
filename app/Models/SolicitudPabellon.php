@@ -112,14 +112,14 @@ class SolicitudPabellon extends Model
     public function setGlObservacionAttribute($value) 
     {
       if(!isset($value) && $value == null){
-        $this->attributes['gl_observacion'] = '';
+            $this->attributes['gl_observacion'] = '';
       }else{
-        $this->attributes['gl_observacion'] = $value;
+            $this->attributes['gl_observacion'] = $value;
       }
     }
 
     public function setGlSalaAttribute($value) 
-	  {
+	{
         if(!isset($value) && $value == null){
             $this->attributes['gl_sala'] = '';
         }else{
@@ -128,7 +128,7 @@ class SolicitudPabellon extends Model
     }
 
     public function setGlCamaAttribute($value) 
-	  {
+	{
         if(!isset($value) && $value == null){
             $this->attributes['gl_cama'] = '';
         }else{
@@ -137,7 +137,7 @@ class SolicitudPabellon extends Model
     }
 
     public function setNrOrdenAttribute($value) 
-	  {
+	{
         if(!isset($value) && $value == null){
             $this->attributes['nr_orden'] = '';
         }else{
@@ -146,7 +146,7 @@ class SolicitudPabellon extends Model
     }
 
     public function setGlDiagnostico2Attribute($value) 
-	  {
+	{
         if(!isset($value) && $value == null){
             $this->attributes['gl_diagnostico_2'] = '';
         }else{
@@ -155,7 +155,7 @@ class SolicitudPabellon extends Model
     }
 
     public function setGlIntervencionAttribute($value) 
-	  {
+	{
         if(!isset($value) && $value == null){
             $this->attributes['gl_intevension'] = '';
         }else{
@@ -164,7 +164,7 @@ class SolicitudPabellon extends Model
     }
 
     public function setFcIntervencionAttribute($value) 
-	  {
+	{
         if($value == null){
             $this->attributes['fc_intervencion'] = '0000-00-00';
         }else{
@@ -173,7 +173,7 @@ class SolicitudPabellon extends Model
     }
 
     public function setTmEstimadoAttribute($value) 
-	  {
+	{
         if($value == null){
             $this->attributes['tm_estimado'] = '00:00:00';
         }else{
@@ -183,7 +183,7 @@ class SolicitudPabellon extends Model
 
     public function getNombreAttribute()
     {
-      return ucwords(mb_strtolower("{$this->gl_nombre} {$this->gl_paterno} {$this->gl_materno}"));
+        return ucwords(mb_strtolower("{$this->gl_nombre} {$this->gl_paterno} {$this->gl_materno}"));
     }
 
     public function getFechaIngresoAttribute()
@@ -303,32 +303,32 @@ class SolicitudPabellon extends Model
     // relaciones
     public function equipoMedico()
     {
-		  return $this->belongsTo(\App\Models\EquipoMedico::class, 'id_equipo')->withDefault(["gl_descripcion" => "Sin Información"]);
+		return $this->belongsTo(\App\Models\EquipoMedico::class, 'id_equipo')->withDefault(["gl_descripcion" => "Sin Información"]);
     }
 
     public function pabellon()
     {
-		  return $this->belongsTo(\App\Models\Pabellon::class, 'id_pabellon')->withDefault(["gl_nombre" => "Sin Información"]);
+		return $this->belongsTo(\App\Models\Pabellon::class, 'id_pabellon')->withDefault(["gl_nombre" => "Sin Información"]);
     }
 
     public function unidad()
     {
-		  return $this->belongsTo(\App\Models\UnidadDemandante::class, 'id_unidad')->withDefault(["gl_nombre" => "Sin Información"]);
+		return $this->belongsTo(\App\Models\UnidadDemandante::class, 'id_unidad')->withDefault(["gl_nombre" => "Sin Información"]);
     }
 
     public function paciente()
     {
-		  return $this->belongsTo(\App\Models\Paciente::class, 'id_paciente')->withDefault(["gl_nombre" => "Sin ID de Paciente"]);
+		return $this->belongsTo(\App\Models\Paciente::class, 'id_paciente')->withDefault(["gl_nombre" => "Sin ID de Paciente"]);
     }
 
     public function usuario()
     {
-		  return $this->belongsTo(\App\Models\User::class, 'id_usuario');
+		return $this->belongsTo(\App\Models\User::class, 'id_usuario');
     }
 
     public function medico()
     {
-		  return $this->belongsTo(\App\Models\Medico::class, 'id_medico');
+		return $this->belongsTo(\App\Models\Medico::class, 'id_medico');
     }
 
     public function cie10()
@@ -338,91 +338,91 @@ class SolicitudPabellon extends Model
     
     public function prestaciones()
     {
-      return $this->belongsToMany(\App\Models\Prestacion::class, 'cb_solicitud_pabellon_prestacion', 'id_solicitud', 'id_prestacion', 'id', 'prs_corr');
+        return $this->belongsToMany(\App\Models\Prestacion::class, 'cb_solicitud_pabellon_prestacion', 'id_solicitud', 'id_prestacion', 'id', 'prs_corr');
     }
 
     public function estado()
     {
-		  return $this->belongsTo(\App\Models\SolicitudPabellonEstado::class, 'id_estado')->withDefault();
+		return $this->belongsTo(\App\Models\SolicitudPabellonEstado::class, 'id_estado')->withDefault();
     }
     
     public function consentimiento()
     {
-		  return $this->hasOne(\App\Models\Consentimiento::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\Consentimiento::class, 'id_solicitud');
     }
     
     public function asignacion()
     {
-		  return $this->hasOne(\App\Models\SolicitudPabellonAsignacion::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\SolicitudPabellonAsignacion::class, 'id_solicitud');
     }
 
     public function protocolo()
     {
-		  return $this->hasOne(\App\Models\Protocolo::class, 'id_solicitud_pabellon');
+		return $this->hasOne(\App\Models\Protocolo::class, 'id_solicitud_pabellon');
     }
     
     public function equipo()
     {
-		  return $this->hasMany(\App\Models\SolicitudPabellonEquipo::class, 'id_solicitud');
+		return $this->hasMany(\App\Models\SolicitudPabellonEquipo::class, 'id_solicitud');
     }
 
     public function pausaPre()
     {
-		  return $this->hasOne(\App\Models\PausaPre::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaPre::class, 'id_solicitud');
     }
     
     public function pausaPabellon()
     {
-		  return $this->hasOne(\App\Models\PausaPabellon::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaPabellon::class, 'id_solicitud');
     }
     
     public function pausaAnestesia()
     {
-		  return $this->hasOne(\App\Models\PausaAnestesia::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaAnestesia::class, 'id_solicitud');
     }
 
     public function pausaSeguridad()
     {
-		  return $this->hasOne(\App\Models\PausaSeguridad::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaSeguridad::class, 'id_solicitud');
     }
 
     public function pausaIntra()
     {
-		  return $this->hasOne(\App\Models\PausaIntra::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaIntra::class, 'id_solicitud');
     }
 
     public function pausaRecuento()
     {
-		  return $this->hasOne(\App\Models\PausaRecuento::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaRecuento::class, 'id_solicitud');
     }
 
     public function pausaEpicrisis()
     {
-		  return $this->hasOne(\App\Models\PausaEpicrisis::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaEpicrisis::class, 'id_solicitud');
     }
 
     public function pausaRecuperacion()
     {
-		  return $this->hasOne(\App\Models\PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', '!=', 18)->where('id_destino_detalle', '!=', 99);
+		return $this->hasOne(\App\Models\PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', '!=', 18)->where('id_destino_detalle', '!=', 99);
     }
 
     public function pausaRecuperacionTransitoria()
     {
-		  return $this->hasOne(\App\Models\PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', 18)->where('bo_uca', 2);
+		return $this->hasOne(\App\Models\PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', 18)->where('bo_uca', 2);
     }
 
     public function pausaTraslado()
     {
-		  return $this->hasOne(\App\Models\PausaTraslado::class, 'id_solicitud');
+		return $this->hasOne(\App\Models\PausaTraslado::class, 'id_solicitud');
     }
 
     public function solicitudesInsumos()
     {
-		  return $this->hasMany(\App\Models\SolicitudInsumo::class, 'id_solicitud_pabellon');
+		return $this->hasMany(\App\Models\SolicitudInsumo::class, 'id_solicitud_pabellon');
     }
 
     public function solicitudesInsumosBodega()
     {
-		  return $this->hasMany(\App\Models\SolicitudInsumoBodega::class, 'id_solicitud_pabellon');
+		return $this->hasMany(\App\Models\SolicitudInsumoBodega::class, 'id_solicitud_pabellon');
     }
 }
