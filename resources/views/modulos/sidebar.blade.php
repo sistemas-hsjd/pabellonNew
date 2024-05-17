@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-bg-dark sidebar-color-primary shadow">
     <div class="brand-container">
         <a href="javascript:;" class="brand-link">
-        <img src="{{ Vite::asset('resources/assets/img/logoSJD.png') }}" alt="AdminLTE Logo" class="brand-image opacity-80 shadow">
+        <img src="img/logoSJD.png" alt="Pabellón HSJD" class="brand-image opacity-80 shadow">
         <span class="brand-text fw-light">Pabellón Digital</span>
         </a>
         <a class="pushmenu mx-1" data-lte-toggle="sidebar-mini" href="javascript:;" role="button"><i class="fas fa-angle-double-left"></i></a>

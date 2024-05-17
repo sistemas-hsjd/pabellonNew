@@ -116,13 +116,13 @@
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            {{-- <img src="{{ Vite::asset('resources/assets/img/user2-160x160.jpg') }}" class="user-image img-circle shadow" alt="User Image"> --}}
+            <img src="img/user2-160x160.jpg" class="user-image img-circle shadow" alt="User Image">
             <span class="d-none d-md-inline">Nelson Serrano Herrera</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="/img/user2-160x160.jpg" class="img-circle shadow" alt="User Image">
+                    <img src="img/user2-160x160.jpg" class="img-circle shadow" alt="User Image">
                     <p>Nelson Serrano Herrera - Web Developer<small>Member since Nov. 2012</small></p>
                 </li>
                 <!-- Menu Body -->
