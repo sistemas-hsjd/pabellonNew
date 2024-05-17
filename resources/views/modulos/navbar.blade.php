@@ -52,7 +52,7 @@
                 <!-- Message Start -->
                 <div class="d-flex">
                 <div class="flex-shrink-0">
-                    <img src="{{ Vite::asset('resources/assets/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle me-3">
+                    <img src="img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle me-3">
                 </div>
                 <div class="flex-grow-1">
                     <h3 class="dropdown-item-title">
