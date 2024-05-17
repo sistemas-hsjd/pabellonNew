@@ -48,7 +48,7 @@
     <!--  ./wrapper -->
     <!-- AdminLTE App -->
     <script src="js/bootstrap.bundle.min.js"></script>
-    @vite(['resources/assets/js/jquery-3-6-0.min.js' , 'resources/assets/js/adminlte.js', 'resources/js/app.js'])
+    @vite(['resources/assets/js/adminlte.js', 'resources/js/app.js'])
 
     <!-- OPTIONAL SCRIPTS -->
     <script>
