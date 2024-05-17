@@ -31,7 +31,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="buscar-ficha" class="nav-link">
                                 <i class="nav-icon far fa-solid fa-magnifying-glass"></i>
                                 <p>Buscar Paciente</p>
                             </a>
@@ -459,9 +459,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="lista-de-usuarios" class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
-                                <p>Level 2</p>
+                                <p>Lista de usuarios</p>
                             </a>
                         </li>
                         <li class="nav-item">
