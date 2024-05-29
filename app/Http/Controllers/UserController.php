@@ -21,7 +21,7 @@ class UserController extends Controller
 
 
         //return 'desde el index';
-        $users = Labor::get();
+        $users = User::get();
         // ->when($request->has('rut') && !is_null($request->rut), function ($collection) use ($request, $rut) {
         //     return $collection->whereRaw("gl_rut LIKE ?", ['%'.$rut.'%']);
         // })
