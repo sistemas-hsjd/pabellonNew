@@ -19,16 +19,14 @@ class UserController extends Controller
 
     public function index(Request $request){
 
-
-        //return 'desde el index';
-        $users = User::get();
+        $users = User::with('Perfiles', 'Bodegas', 'Especialidades', 'EquiposMedicos', 'Pabellones')->get();
         // ->when($request->has('rut') && !is_null($request->rut), function ($collection) use ($request, $rut) {
         //     return $collection->whereRaw("gl_rut LIKE ?", ['%'.$rut.'%']);
         // })
         // ->when($request->has('nombre') && !is_null($request->nombre), function ($collection) use ($request) {
         //     return $collection->whereRaw("gl_nombre LIKE ?", ['%'.$request->nombre.'%']);
         // })
-    
+       
 
         return $users;
     }
