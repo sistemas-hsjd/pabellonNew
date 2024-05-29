@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+// use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Perfil::class, 'cb_labor', 'id_usuario', 'id_perfil');
     }
 
-    public function Bodegas(): BelongsToMany
+    public function Bodegas()
     {
         return $this->belongsToMany(Bodega::class, 'cb_usuario_bodega', 'id_usuario', 'id_bodega');
     }
