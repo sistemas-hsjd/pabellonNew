@@ -13,6 +13,6 @@ class Perfil extends Model
 
     public function Opciones()
     {
-        return $this->belongsToMany(\App\Models\Opcion::class, 'cb_permiso', 'id_perfil', 'id_opcion');
+        return $this->belongsToMany(Opcion::class, 'cb_permiso', 'id_perfil', 'id_opcion');
     }
 }

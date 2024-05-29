@@ -30,6 +30,6 @@ class Medico extends Model
 
     public function labores()
     {
-        return $this->belongsToMany(\App\Models\Labor::class, 'cb_medico_cod_ncr', 'pro_cod', 'tla_cod', 'pro_cod', 'cod_car');
+        return $this->belongsToMany(Labor::class, 'cb_medico_cod_ncr', 'pro_cod', 'tla_cod', 'pro_cod', 'cod_car');
     }
 }

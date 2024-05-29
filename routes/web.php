@@ -32,10 +32,17 @@ Route::post('get-solicitudes', [PacienteController::class, 'getSolicitudes']);
 Route::prefix('api')->group(function () {
     Route::get('/detalle/{id}', [SolicitudPabellonController::class, 'detalle']);
     Route::get('/get-info', [UserController::class, 'getInfoCreateUser']);
+    Route::get('/get-users', [UserController::class, 'index']);
 });
 
 Route::prefix('user')->group(function () {
     Route::post('/registrar', [UserController::class, 'store']);
+    Route::post('/get-info', [UserController::class, 'editUserInfo']);
+    Route::post('/eliminar', [UserController::class, 'eliminarUser']);
+    Route::post('/reset-password', [UserController::class, 'resetPassword']);
 });
 
 Route::post('get-fonasa', [UserController::class, 'getFonasa']);
+
+Route::post('get-paciente-by-rut', [UserController::class, 'getPaciente']);
+

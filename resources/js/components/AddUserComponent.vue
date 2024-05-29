@@ -14,15 +14,16 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="run" class="form-label"><strong>RUN:</strong></label>
-                                    <input v-model="run" type="email" class="form-control form-control-sm" id="run" @change="getFonasa($event)" placeholder="Ingrese Run">
-                                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                                    <input v-model="run" type="email" class="form-control form-control-sm" id="run" minlength="5" maxlength="10" @change="getPersona($event)" placeholder="Ingrese Run">
+                                    <span v-if="errorMensajes.gl_rut" class="mensaje-error">{{ errorMensajes.gl_rut }}</span>
+                                  
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label"><strong>Nombre</strong></label>
                                     <input v-model="nombre" type="text" class="form-control form-control-sm" id="nombre" placeholder="Ingrese nombre">
-                                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                                    <span v-if="errorMensajes.gl_rut" class="mensaje-error">{{ errorMensajes.gl_nombre }}</span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -82,6 +83,20 @@
                         </div>
 
                         <div v-if="anadirEquipoMedico">
+                            <div class="row ">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="labor" class="form-label"><strong>Labor:</strong></label>
+                                        <v-select v-model="personaEquipo.selectLabores" multiple :options="labores" :reduce="labor => labor.id" label="gl_nombre" id="labor" placeholder="Seleccione Labor"></v-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="tProfesional" class="form-label"><strong>Tipo Profesional:</strong></label>
+                                        <v-select v-model="personaEquipo.selectTprofesionales" :options="tiposProfesionales" :reduce="tProf => tProf.id" label="text" id="tProfesional" placeholder="Seleccione Tipo Profesional"></v-select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row mt-4">
                                 <div class="col-md-4">
                                     <div class="mb-3">
@@ -102,27 +117,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row ">
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="labor" class="form-label"><strong>Labor:</strong></label>
-                                        <v-select v-model="personaEquipo.selectLabores" multiple :options="labores" :reduce="labor => labor.id" label="gl_nombre" id="labor" placeholder="Seleccione Labor"></v-select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="tProfesional" class="form-label"><strong>Tipo Profesional:</strong></label>
-                                        <v-select v-model="personaEquipo.selectTprofesionales" :options="tiposProfesionales" :reduce="tProf => tProf.id" label="text" id="tProfesional" placeholder="Seleccione Tipo Profesional"></v-select>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                    <button type="button" class="btn btn-primary" @click="addUser()">Guardar</button>
+                    <button v-if="!update" type="button" class="btn btn-primary" @click="addUser()">Guardar</button>  
+                    <button v-if="update" type="button" class="btn btn-primary" @click="editarUser()">Guardar cambios</button>
                 </div>
                 </div>
             </div>
@@ -131,13 +132,17 @@
 </template>
 <script>
 import { defineComponent } from 'vue'
+import Swal from 'sweetalert2';
 export default defineComponent({
-    props: [],
+    props: ['datos'],
     components: {
         // Select2
     },
     data() {
        return {
+            errorMensajes: [],
+            rutNoValido : false,
+            update : false,
             titulo:'Crear Cuenta',
             perfil: [], 
             bodega: [], 
@@ -170,6 +175,9 @@ export default defineComponent({
 
         },
         cerrarModal(){
+            this.errorMensajes = []
+            this.update = false
+            this.titulo = 'Crear Cuenta'
             this.perfil = []
             this.bodega = []
             this.especialidad = []
@@ -214,10 +222,42 @@ export default defineComponent({
             })
             .catch(error => {
                 console.error('Error: ', error);
+                    if (error.response.status === 422) {
+                        // me.loadingRegistrar = false;
+                        const validationErrors = error.response.data.errors;
+                        let errores = {};
+                        Object.keys(validationErrors).forEach(key => {
+                            errores[key] = validationErrors[key][0];
+                        });
+                        this.errorMensajes = errores;
+                        console.log(this.errorMensajes)
+                    } else {
+                        console.error('Error en la solicitud:', error);
+                    }
             });
         },
-        getFonasa(input){
-            var rut = input.srcElement.value;
+        editarUser(){
+            this.addUser()
+        },
+        getPersona(input){
+            const rut = input.srcElement.value;
+            this.getFonasa(rut)
+            var data = new FormData();
+            data.append('rut', rut);
+            axios.post('/get-fonasa', data)
+            .then(response => { 
+                const { nombres, paterno, materno } = response.data[0]
+                this.nombre = nombres
+                this.personaEquipo.nombre = nombres
+                this.personaEquipo.apellidoP = paterno
+                this.personaEquipo.apellidoM = materno
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+          
+        },
+        getFonasa(rut){
             var data = new FormData();
             data.append('rut', rut);
             axios.post('/get-fonasa', data, {
@@ -250,7 +290,66 @@ export default defineComponent({
             .catch(error => {
                 console.error('Error: ', error);
             });
-        }
+        },
+        setValues(datos){
+            //console.log(datos)
+            this.update = true
+            this.titulo = 'Editar Usuario'
+            this.nombre = datos.gl_nombre
+            this.run = datos.gl_rut
+            this.email = datos.gl_mail
+            this.perfil = datos.perfiles.map(perfil => perfil.id)
+            this.bodega = datos.bodegas.map(bodega => bodega.id)
+            this.equipoMedico = datos.equipos_medicos.map(equipo => equipo.id)
+            this.pabellon =  datos.pabellones.map(pabellon => pabellon.id)
+            this.especialidad = datos.especialidades.map(especialidad => especialidad.id)
+            this.getInfoUser(datos.id)
+        },
+        getInfoUser(id){
+            //console.log(id)
+            var data = new FormData();
+            data.append('id', id);
+            axios.post('/user/get-info', data)
+            .then(response => { 
+                const { medico } = response.data
+                if(medico){
+                    this.anadirEquipoMedico = true
+                    this.personaEquipo.selectLabores = medico.labores.map(labor => labor.id)
+                    this.personaEquipo.nombre = medico.nombre
+                    this.personaEquipo.apellidoP = medico.pro_apemat
+                    this.personaEquipo.apellidoM = medico.pro_apepat
+                    if(medico.pro_tipo){
+                        this.personaEquipo.selectTprofesionales = medico.pro_tipo
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+        },
+        validarRutEnTiempoReal(event) {
+                const rut = event.target.value;
+                const rutLimpio = rut.replace(/[^\dkK]/g, '').toUpperCase();
+                const numero = rutLimpio.slice(0, -1);
+                const digitoVerificador = rutLimpio.slice(-1);
+
+                if (/^\d+$/.test(numero)) {
+                    let suma = 0;
+                    let multiplo = 2;
+
+                    for (let i = numero.length - 1; i >= 0; i--) {
+                    suma += parseInt(numero.charAt(i)) * multiplo;
+                    multiplo = multiplo === 7 ? 2 : multiplo + 1;
+                    }
+
+                    const resultado = (11 - (suma % 11)) % 11;
+                    const digitoCalculado = resultado === 10 ? 'K' : resultado.toString();
+
+                    if (digitoCalculado === digitoVerificador) {
+                        this.run = numero.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + '-' + digitoVerificador;
+                    }
+                }
+        },
     }, 
     computed:{
       
@@ -263,5 +362,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
- 
+.v-select-menu--custom {
+    max-height: 200px; /* Ajusta este valor según tus necesidades */
+    overflow-y: auto;
+}
+.mensaje-error{
+    color:red;
+    font-size: .7em;
+    font-weight: 800;
+}
 </style>

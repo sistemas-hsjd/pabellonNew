@@ -16,6 +16,20 @@ class PacienteController extends Controller
     {
         $this->informeBiopsia = $informeBiopsia;
     }
+
+    public function getPaciente(Request $request){
+        if ($request->filled('run')) {
+            if(Rut::parse($request->run)->validate()){
+                $rut = Rut::parse($request->run)->format(Rut::FORMAT_WITH_DASH);
+                $rut = explode("-", $rut); 
+                $paciente = Paciente::whereRaw('nr_run = ? AND tx_digito_verificador = ?', [$rut[0], $rut[1]])->first();
+            }else{
+                return "rut incorrecto";
+            }
+        }
+        
+        return $run;
+    }
     
     public function buscarFicha(Request $request){
         if ($request->filled('ficha')) {

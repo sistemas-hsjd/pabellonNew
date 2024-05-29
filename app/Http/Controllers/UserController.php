@@ -12,9 +12,25 @@ use App\Models\TipoProfesional;
 use App\Models\Medico;
 use Freshwork\ChileanBundle\Rut;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
+
+    public function index(Request $request){
+        $users = User::with('Perfiles', 'Bodegas', 'Especialidades', 'EquiposMedicos', 'Pabellones')
+        // ->when($request->has('rut') && !is_null($request->rut), function ($collection) use ($request, $rut) {
+        //     return $collection->whereRaw("gl_rut LIKE ?", ['%'.$rut.'%']);
+        // })
+        // ->when($request->has('nombre') && !is_null($request->nombre), function ($collection) use ($request) {
+        //     return $collection->whereRaw("gl_nombre LIKE ?", ['%'.$request->nombre.'%']);
+        // })
+        ->get();
+
+        return $users;
+    }
+
+
     public function getFonasa(Request $request){
         if (Rut::parse($request->rut)->isValid()){
             $arrayRut = Rut::parse($request->rut)->toArray();
@@ -64,7 +80,7 @@ class UserController extends Controller
         ];
     }
 
-    public function store(Request $request){
+    public function store(UserRequest $request){
         // return $request->bodegas;
         $dataRequest = [
             'gl_nombre' => $request->gl_nombre,
@@ -73,17 +89,31 @@ class UserController extends Controller
         ];
 
         $user = User::updateOrCreate(['gl_rut'=> $request->gl_rut], $dataRequest);
-        $bodegas = explode(",", $request->bodegas);
-        $perfiles = explode(",", $request->perfiles);
-        $especialidades = explode(",", $request->especialidades);
-        $equipoMedicos = explode(",", $request->equiposMedicos);
-        $pabellones = explode(",", $request->pabellones);
+        if (isset($request->bodegas)) {
+            $bodegas = explode(",", $request->bodegas);
+            $user->Bodegas()->sync($bodegas);
+        }
+
+        if (isset($request->perfiles)) {
+            $perfiles = explode(",", $request->perfiles);
+            $user->Perfiles()->sync($perfiles);
+        }
+
+        if (isset($request->especialidades)) {
+            $especialidades = explode(",", $request->especialidades);
+            $user->Especialidades()->sync($especialidades);
+        }
+
+        if (isset($request->equiposMedicos)) {
+            $equipoMedicos = explode(",", $request->equiposMedicos);
+            $user->EquiposMedicos()->sync($equipoMedicos);
+        }
+
+        if (isset($request->pabellones)) {
+            $pabellones = explode(",", $request->pabellones);
+            $user->Pabellones()->sync($pabellones);
+        }       
             
-        $user->Perfiles()->sync($perfiles);
-        $user->Bodegas()->sync($bodegas);
-        $user->Especialidades()->sync($especialidades);
-        $user->EquiposMedicos()->sync($equipoMedicos);
-        $user->Pabellones()->sync($pabellones);
 
         if($request->equipoClinico=='on'){
             $rut = explode("-", $request->gl_rut);
@@ -107,4 +137,49 @@ class UserController extends Controller
         }
     }
 
+    public function editUserInfo(Request $request){
+
+        $user = User::with( 'Perfiles', 'Perfiles.Opciones', 'Bodegas', 'Especialidades', 'EquiposMedicos', 'Pabellones')->find($request->id);
+        $rut = explode("-", $user->gl_rut);
+        $medico = Medico::with('Labores')->where('pro_rut', $rut[0])->first();
+
+        return [
+            "user" => $user,
+            "medico" => $medico
+        ];
+    }
+
+    public function eliminarUser(Request $request){
+        $user = User::find($request->id);
+        $user->Perfiles()->detach();
+        $user->Bodegas()->detach();
+        $user->Especialidades()->detach();
+        $user->EquiposMedicos()->detach();
+        $user->Pabellones()->detach();
+        if($user->forceDelete()){
+            return "ok";
+            //return "El usuario a sido eliminado correctamente";
+        }else{
+            return "error";
+        }
+    }
+
+    public function resetPassword(Request $request) 
+    {
+        // PARA REINICIAR TODAS LAS CONTRASEÑAS BCRYPT
+        // $users = User::get();
+        // foreach ($users as $key => $user) {
+        //     $password = substr($user->gl_rut, 0, 4);
+        //     $user->password = $password;
+        //     $user->save();
+        // }
+
+        $user = User::find($request->id);
+        $password = substr($user->gl_rut, 0, 4);
+        $user->gl_clave = $password;
+        $user->password = $password;
+        $user->save();
+
+        return 'ok';
+    }
 }
