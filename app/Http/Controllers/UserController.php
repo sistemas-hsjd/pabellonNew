@@ -18,6 +18,9 @@ class UserController extends Controller
 {
 
     public function index(Request $request){
+
+
+        return 'desde el index';
         $users = User::with('Perfiles', 'Bodegas', 'Especialidades', 'EquiposMedicos', 'Pabellones')
         // ->when($request->has('rut') && !is_null($request->rut), function ($collection) use ($request, $rut) {
         //     return $collection->whereRaw("gl_rut LIKE ?", ['%'.$rut.'%']);
