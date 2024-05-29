@@ -21,14 +21,14 @@ class UserController extends Controller
 
 
         //return 'desde el index';
-        $users = User::with('Perfiles')
+        $users = User::all();
         // ->when($request->has('rut') && !is_null($request->rut), function ($collection) use ($request, $rut) {
         //     return $collection->whereRaw("gl_rut LIKE ?", ['%'.$rut.'%']);
         // })
         // ->when($request->has('nombre') && !is_null($request->nombre), function ($collection) use ($request) {
         //     return $collection->whereRaw("gl_nombre LIKE ?", ['%'.$request->nombre.'%']);
         // })
-        ->get();
+    
 
         return $users;
     }
