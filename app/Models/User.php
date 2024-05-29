@@ -14,7 +14,7 @@ class User extends Authenticatable
 
     protected $table = 'cb_usuario';
     protected $guarded = [];
-    protected $appends = ['nombre', 'opciones'];
+    // protected $appends = ['nombre', 'opciones'];
 
     public static function boot()
     {
