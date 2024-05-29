@@ -36,14 +36,6 @@
                                 <p>Buscar Paciente</p>
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
-                                <i class="nav-icon far fa-solid fa-magnifying-glass"></i>
-                                <p>Nuevo Pabellón</p>
-                            </a>
-                        </li>
-                     
                     </ul>
                 </li>
                 {{-- solicitud pabellon --}}

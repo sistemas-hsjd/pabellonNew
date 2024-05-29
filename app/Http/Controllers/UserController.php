@@ -16,21 +16,10 @@ use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
-
     public function index(Request $request){
-
-        $users = User::with('Perfiles', 'Bodegas', 'Especialidades', 'EquiposMedicos', 'Pabellones')->get();
-        // ->when($request->has('rut') && !is_null($request->rut), function ($collection) use ($request, $rut) {
-        //     return $collection->whereRaw("gl_rut LIKE ?", ['%'.$rut.'%']);
-        // })
-        // ->when($request->has('nombre') && !is_null($request->nombre), function ($collection) use ($request) {
-        //     return $collection->whereRaw("gl_nombre LIKE ?", ['%'.$request->nombre.'%']);
-        // })
-       
-
+        $users = User::with('Perfiles', 'Bodegas', 'Especialidades', 'EquiposMedicos', 'Pabellones')->get();       
         return $users;
     }
-
 
     public function getFonasa(Request $request){
         if (Rut::parse($request->rut)->isValid()){
@@ -82,7 +71,6 @@ class UserController extends Controller
     }
 
     public function store(UserRequest $request){
-        // return $request->bodegas;
         $dataRequest = [
             'gl_nombre' => $request->gl_nombre,
             'gl_rut' => $request->gl_rut,
@@ -115,7 +103,6 @@ class UserController extends Controller
             $user->Pabellones()->sync($pabellones);
         }       
             
-
         if($request->equipoClinico=='on'){
             $rut = explode("-", $request->gl_rut);
             $dataMedico = [

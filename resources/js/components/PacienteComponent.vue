@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-4 contenedor-numero">
                         <div v-if="tipoBusqueda=='rut'">
-                            <input type="text" v-model="run" class="form-control" placeholder="Ingrese Run" minlength="5" maxlength="10" @input="validarRutEnTiempoReal($event)">
+                            <input type="text" v-model="run" class="form-control" placeholder="Ingrese Run" minlength="5" maxlength="11" @input="validarRutEnTiempoReal($event)">
                         </div>
                     
                          <div v-else-if="tipoBusqueda === 'ficha'">
@@ -120,8 +120,8 @@
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                             <li><a class="dropdown-item" href="#" @click="detalle(item.id)">Detalle</a></li>
-                                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                            <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                                                         </ul>
                                                     </div>
                                                 </td>
@@ -260,17 +260,19 @@ export default defineComponent({
     },
     methods: {
         buscarPaciente() {
+            if(this.tipoBusqueda=='rut' && this.run ==''){
+                return
+            }
+            if(this.tipoBusqueda=='ficha' && this.ficha ==''){
+                return
+            }
             this.verPaciente = false;   
             this.loadingBuscar = true;
             var data = new FormData();
             data.append('run', this.run);
             data.append('ficha', this.ficha);
-            axios.post('/buscar-ficha', data, {
-                headers: {'Content-Type': 'multipart/form-data',},
-            })
+            axios.post('/buscar-ficha', data)
             .then(response => {
-                // console.log(response.data)
-
                 if(response.data=='rut incorrecto'){
                     Swal.fire({
                         icon: "error",
@@ -363,9 +365,7 @@ export default defineComponent({
         getSexo(id){
             var data = new FormData();
             data.append('id', id);
-            axios.post('/get-sexo', data, {
-                headers: {'Content-Type': 'multipart/form-data',},
-            })
+            axios.post('/get-sexo', data)
             .then(response => { 
                 this.paciente.sexo = response.data.tx_descripcion
                 // console.log(response.data.tx_descripcion)
