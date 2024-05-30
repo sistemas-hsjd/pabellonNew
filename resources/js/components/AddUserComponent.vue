@@ -171,8 +171,8 @@ export default defineComponent({
         }
     },
     methods: { 
-        onSelect(){
-
+        onSelect(){            
+            
         },
         cerrarModal(){
             this.errorMensajes = []
@@ -364,7 +364,7 @@ export default defineComponent({
 
 <style scoped>
 .v-select-menu--custom {
-    max-height: 200px; /* Ajusta este valor según tus necesidades */
+    max-height: 200px; 
     overflow-y: auto;
 }
 .mensaje-error{
