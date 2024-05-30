@@ -368,7 +368,6 @@ export default defineComponent({
             axios.post('/get-sexo', data)
             .then(response => { 
                 this.paciente.sexo = response.data.tx_descripcion
-                // console.log(response.data.tx_descripcion)
             })
             .catch(error => {
                 console.error('Error: ', error);
@@ -377,11 +376,8 @@ export default defineComponent({
         getPrevision(id){
             var data = new FormData();
             data.append('id', id);
-            axios.post('/get-prevision', data, {
-                headers: {'Content-Type': 'multipart/form-data',},
-            })
+            axios.post('/get-prevision', data)
             .then(response => { 
-                // console.log(response.data)
                 this.paciente.prevision = response.data.tx_descripcion;
             })
             .catch(error => {
