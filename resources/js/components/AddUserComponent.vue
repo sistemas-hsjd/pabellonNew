@@ -247,7 +247,7 @@ export default defineComponent({
             axios.post('/get-fonasa', data)
             .then(response => { 
                 const { nombres, paterno, materno } = response.data[0]
-                this.nombre = nombres
+                this.nombre = `${nombres}`
                 this.personaEquipo.nombre = nombres
                 this.personaEquipo.apellidoP = paterno
                 this.personaEquipo.apellidoM = materno
@@ -265,7 +265,7 @@ export default defineComponent({
             })
             .then(response => { 
                 const { nombres, paterno, materno } = response.data[0]
-                this.nombre = nombres
+                this.nombre = `${nombres} ${paterno} ${materno}`
                 this.personaEquipo.nombre = nombres
                 this.personaEquipo.apellidoP = paterno
                 this.personaEquipo.apellidoM = materno

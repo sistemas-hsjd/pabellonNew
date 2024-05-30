@@ -15,8 +15,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table-responsive">
-                                    <table id="tabla-usuarios" class="display table table-striped">
-                                    <thead>
+                                    <table id="tabla-usuarios" class="display table table-striped table-bordered">
+                                    <thead class="table-primary">
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
