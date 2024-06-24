@@ -49,6 +49,7 @@
     <!-- AdminLTE App -->
     <script src="js/bootstrap.bundle.min.js"></script>
     @vite(['resources/assets/js/adminlte.js', 'resources/js/app.js'])
+ 
 
     <!-- OPTIONAL SCRIPTS -->
     <script>
@@ -69,7 +70,7 @@
                 })
             }
         })
-
+ 
     </script>
  
   </body>

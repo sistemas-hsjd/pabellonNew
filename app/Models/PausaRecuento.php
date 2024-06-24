@@ -101,4 +101,16 @@ class PausaRecuento extends Model
              $this->attributes['gl_observacion'] = $value;
          }
      }
+
+    // relaciones
+    public function gc()
+    {
+		return $this->hasMany(PausaRecuentoGc::class, 'id_solicitud', 'id_solicitud');
+    }
+
+    public function in()
+    {
+	    return $this->hasMany(PausaRecuentoIn::class, 'id_solicitud', 'id_solicitud');
+    }
+
 }

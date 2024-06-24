@@ -4,3 +4,36 @@
     outline: none;
     box-shadow: none;
 }
+.list-nombre-paciente{
+    margin-right: .5em !important;
+    color:rgb(182, 176, 176);
+    font-size: 1em;
+}
+.span-title{
+    font-size: 1em;
+    font-weight: bold;
+}
+.nombre-paciente{
+    margin-top: .2em;
+    font-size: 1.2em;
+    font-weight: bold; 
+}
+.list-group-item{
+    padding-bottom: 0;
+}
+
+.list-group-item p{
+    margin-left: .5em;
+}
+.archivo-pdf{
+    cursor:pointer;
+}
+.descripcion-solicitudes p{
+    margin-bottom: 0;
+} 
+.a-ingresar-conc-inf{
+    cursor: pointer;
+}   
+.list-group-item span{
+    margin-bottom: 0;
+}

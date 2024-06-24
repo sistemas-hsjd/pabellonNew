@@ -11,6 +11,22 @@ class PausaIntra extends Model
     protected $table = 'cb_pausa_intra';
     public $guarded = [];
 
+     // Boot
+     public static function boot()
+     {
+         parent::boot();
+ 
+         static::creating(function($pausaIntra)
+         {
+             $pausaIntra->id_responsable = Auth::id();
+         });
+         
+         static::created(function($pausaIntra)
+         {
+             $pausaIntra->id_responsable = Auth::id();
+         });
+     }
+
      // Set
      public function setGlFolleyAttribute($value) 
      {
@@ -65,6 +81,15 @@ class PausaIntra extends Model
              $this->attributes['gl_observacion_horario'] = $value;
          }
      }
- 
 
+     // relaciones
+     public function accesoVascular()
+     {
+        return $this->hasMany(PausaIntraAccesoVascular::class, 'id_solicitud', 'id_solicitud');
+     }
+   
+     public function drenaje()
+     {
+        return $this->hasMany(PausaIntraDrenaje::class, 'id_solicitud', 'id_solicitud');
+     }
 }

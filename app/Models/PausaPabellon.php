@@ -15,7 +15,7 @@ class PausaPabellon extends Model
     // Set
     public function setGlEnergiaAttribute($value) 
 	{
-		$this->attributes['gl_energia'] = implode(",", $value);
+		$this->attributes['gl_energia'] = $value;
     }
 
 }

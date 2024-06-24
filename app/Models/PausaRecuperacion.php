@@ -11,8 +11,8 @@ class PausaRecuperacion extends Model
     protected $table = 'cb_pausa_recuperacion';
     public $guarded = [];
 
-    // public function controles()
-    // {
-	// 	return $this->hasMany(\App\Models\PausaRecuperacionControl::class, 'id_solicitud', 'id_solicitud');
-    // }
+    public function controles()
+    {
+		return $this->hasMany(PausaRecuperacionControl::class, 'id_solicitud', 'id_solicitud');
+    }
 }

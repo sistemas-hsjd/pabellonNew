@@ -303,126 +303,126 @@ class SolicitudPabellon extends Model
     // relaciones
     public function equipoMedico()
     {
-		return $this->belongsTo(\App\Models\EquipoMedico::class, 'id_equipo')->withDefault(["gl_descripcion" => "Sin Información"]);
+		return $this->belongsTo(EquipoMedico::class, 'id_equipo')->withDefault(["gl_descripcion" => "Sin Información"]);
     }
 
     public function pabellon()
     {
-		return $this->belongsTo(\App\Models\Pabellon::class, 'id_pabellon')->withDefault(["gl_nombre" => "Sin Información"]);
+		return $this->belongsTo(Pabellon::class, 'id_pabellon')->withDefault(["gl_nombre" => "Sin Información"]);
     }
 
     public function unidad()
     {
-		return $this->belongsTo(\App\Models\UnidadDemandante::class, 'id_unidad')->withDefault(["gl_nombre" => "Sin Información"]);
+		return $this->belongsTo(UnidadDemandante::class, 'id_unidad')->withDefault(["gl_nombre" => "Sin Información"]);
     }
 
     public function paciente()
     {
-		return $this->belongsTo(\App\Models\Paciente::class, 'id_paciente')->withDefault(["gl_nombre" => "Sin ID de Paciente"]);
+		return $this->belongsTo(Paciente::class, 'id_paciente')->withDefault(["gl_nombre" => "Sin ID de Paciente"]); 
     }
 
     public function usuario()
     {
-		return $this->belongsTo(\App\Models\User::class, 'id_usuario');
+		return $this->belongsTo(User::class, 'id_usuario');
     }
 
     public function medico()
     {
-		return $this->belongsTo(\App\Models\Medico::class, 'id_medico');
+		return $this->belongsTo(Medico::class, 'id_medico');
     }
 
     public function cie10()
     {
-	    return $this->belongsTo(\App\Models\Cie10::class, 'id_diagnostico_1');
+	    return $this->belongsTo(Cie10::class, 'id_diagnostico_1');
     }
     
     public function prestaciones()
     {
-        return $this->belongsToMany(\App\Models\Prestacion::class, 'cb_solicitud_pabellon_prestacion', 'id_solicitud', 'id_prestacion', 'id', 'prs_corr');
+        return $this->belongsToMany(Prestacion::class, 'cb_solicitud_pabellon_prestacion', 'id_solicitud', 'id_prestacion', 'id', 'prs_corr');
     }
 
     public function estado()
     {
-		return $this->belongsTo(\App\Models\SolicitudPabellonEstado::class, 'id_estado')->withDefault();
+		return $this->belongsTo(SolicitudPabellonEstado::class, 'id_estado')->withDefault();
     }
     
     public function consentimiento()
     {
-		return $this->hasOne(\App\Models\Consentimiento::class, 'id_solicitud');
+		return $this->hasOne(Consentimiento::class, 'id_solicitud');
     }
     
     public function asignacion()
     {
-		return $this->hasOne(\App\Models\SolicitudPabellonAsignacion::class, 'id_solicitud');
+		return $this->hasOne(SolicitudPabellonAsignacion::class, 'id_solicitud');
     }
 
     public function protocolo()
     {
-		return $this->hasOne(\App\Models\Protocolo::class, 'id_solicitud_pabellon');
+		return $this->hasOne(Protocolo::class, 'id_solicitud_pabellon');
     }
     
     public function equipo()
     {
-		return $this->hasMany(\App\Models\SolicitudPabellonEquipo::class, 'id_solicitud');
+		return $this->hasMany(SolicitudPabellonEquipo::class, 'id_solicitud');
     }
 
     public function pausaPre()
     {
-		return $this->hasOne(\App\Models\PausaPre::class, 'id_solicitud');
+		return $this->hasOne(PausaPre::class, 'id_solicitud');
     }
     
     public function pausaPabellon()
     {
-		return $this->hasOne(\App\Models\PausaPabellon::class, 'id_solicitud');
+		return $this->hasOne(PausaPabellon::class, 'id_solicitud');
     }
     
     public function pausaAnestesia()
     {
-		return $this->hasOne(\App\Models\PausaAnestesia::class, 'id_solicitud');
+		return $this->hasOne(PausaAnestesia::class, 'id_solicitud');
     }
 
     public function pausaSeguridad()
     {
-		return $this->hasOne(\App\Models\PausaSeguridad::class, 'id_solicitud');
+		return $this->hasOne(PausaSeguridad::class, 'id_solicitud');
     }
 
     public function pausaIntra()
     {
-		return $this->hasOne(\App\Models\PausaIntra::class, 'id_solicitud');
+		return $this->hasOne(PausaIntra::class, 'id_solicitud');
     }
 
     public function pausaRecuento()
     {
-		return $this->hasOne(\App\Models\PausaRecuento::class, 'id_solicitud');
+		return $this->hasOne(PausaRecuento::class, 'id_solicitud');
     }
 
     public function pausaEpicrisis()
     {
-		return $this->hasOne(\App\Models\PausaEpicrisis::class, 'id_solicitud');
+		return $this->hasOne(PausaEpicrisis::class, 'id_solicitud');
     }
 
     public function pausaRecuperacion()
     {
-		return $this->hasOne(\App\Models\PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', '!=', 18)->where('id_destino_detalle', '!=', 99);
+		return $this->hasOne(PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', '!=', 18)->where('id_destino_detalle', '!=', 99);
     }
 
     public function pausaRecuperacionTransitoria()
     {
-		return $this->hasOne(\App\Models\PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', 18)->where('bo_uca', 2);
+		return $this->hasOne(PausaRecuperacion::class, 'id_solicitud')->where('id_destino_pabellon', 18)->where('bo_uca', 2);
     }
 
     public function pausaTraslado()
     {
-		return $this->hasOne(\App\Models\PausaTraslado::class, 'id_solicitud');
+		return $this->hasOne(PausaTraslado::class, 'id_solicitud');
     }
 
     public function solicitudesInsumos()
     {
-		return $this->hasMany(\App\Models\SolicitudInsumo::class, 'id_solicitud_pabellon');
+		return $this->hasMany(SolicitudInsumo::class, 'id_solicitud_pabellon');
     }
 
     public function solicitudesInsumosBodega()
     {
-		return $this->hasMany(\App\Models\SolicitudInsumoBodega::class, 'id_solicitud_pabellon');
+		return $this->hasMany(SolicitudInsumoBodega::class, 'id_solicitud_pabellon');
     }
 }

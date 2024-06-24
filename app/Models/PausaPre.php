@@ -19,7 +19,7 @@ class PausaPre extends Model
  
      public function setGlAislamientoAttribute($value) 
      {
-         $this->attributes['gl_aislamiento'] = implode(",", $value);
+         $this->attributes['gl_aislamiento'] = $value;
      }
      
      public function setGlProtesisDentalAttribute($value) 
@@ -39,4 +39,10 @@ class PausaPre extends Model
              $this->attributes['gl_piel_sana'] = $value;
          }
      }
+
+       // Relaciones
+    public function cie10()
+    {
+		return $this->belongsTo(Cie10::class, 'id_diagnostico_pre');
+    }
 }
