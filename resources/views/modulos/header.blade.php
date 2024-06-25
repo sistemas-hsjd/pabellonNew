@@ -9,5 +9,4 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     @vite(['resources/assets/css/adminlte.css', 'resources/css/app.css'])
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="css/toastr.min.css">
 </head>
