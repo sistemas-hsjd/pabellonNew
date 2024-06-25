@@ -14,7 +14,6 @@ class PausaIntraController extends Controller
 {
     public function store(Request $request)
     {
-        // return $request;
         $intraRequest = [
             'id_solicitud'=> request()->id_solicitud,
             'id_asignacion'=> request()->id_asignacion,

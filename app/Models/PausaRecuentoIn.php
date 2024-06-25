@@ -12,6 +12,21 @@ class PausaRecuentoIn extends Model
 
     public $guarded = [];
     public $timestamps = false;
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($pausaRecuentoIn)
+        {
+            $pausaRecuentoIn->id_responsable = 2590;
+        });
+        
+        static::created(function($pausaRecuentoIn)
+        {
+            $pausaRecuentoIn->id_responsable = 2590;
+        });
+    }
      
     // Relaciones
     public function pabellonera()

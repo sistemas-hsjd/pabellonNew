@@ -115,3 +115,14 @@ Route::prefix('pausaPre')->group(function () {
     Route::post('/get-info', [PausaPreController::class, 'getPausaPre']);
     Route::post('/registrar', [PausaPreController::class, 'store']);
 });
+
+Route::prefix('pausaRecuento')->group(function () {
+    Route::delete('/recuento/eliminar/{id}', [PausaRecuentoController::class, 'eliminar']);
+    Route::post('/get-gasas-compresas', [PausaRecuentoController::class, 'getGasasCompresas']);
+    Route::post('/get-recuentos-instrumentales', [PausaRecuentoController::class, 'getInstrumentales']);
+    Route::post('/get-info', [PausaRecuentoController::class, 'getInfo']);
+    Route::post('/eliminar-recuento-gasa', [PausaRecuentoController::class, 'eliminarRecuentoGasa']);
+    Route::post('/registrar-recuento-gasa', [PausaRecuentoController::class, 'agregarGasasCompresas']);
+    Route::post('/registrar-instrumental', [PausaRecuentoController::class, 'agregarInstrumental']);
+    Route::post('/eliminar-instrumental', [PausaRecuentoController::class, 'eliminarRecuentoInstrumental']); 
+});

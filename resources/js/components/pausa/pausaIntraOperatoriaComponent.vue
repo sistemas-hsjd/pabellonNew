@@ -694,9 +694,13 @@ export default defineComponent({
         verificarFechas(){
             let fc_entrada_servicio = this.fc_entrada_servicio
             fc_entrada_servicio = fc_entrada_servicio.replace(' ', 'T'); 
-
+            let fechaEntradaServicio = new Date(fc_entrada_servicio);
+            // fechaEntradaServicio.setSeconds(0, 0);
+            
             let fc_entrada_pabellon = this.fc_entrada_pabellon
             fc_entrada_pabellon = fc_entrada_pabellon.replace(' ', 'T'); 
+            let fechaEntradaPabellon = new Date(fc_entrada_pabellon);
+            // fechaEntradaPabellon.setSeconds(0, 0);
  
             let fc_inicio_anestesia = this.fc_inicio_anestesia
             fc_inicio_anestesia = fc_inicio_anestesia.replace(' ', 'T'); 
@@ -724,9 +728,23 @@ export default defineComponent({
             fc_maxima.setMinutes(59);
             fc_maxima.setSeconds(59);
             fc_minima.setHours(0);
-            fc_minima.setMinutes(0);
-            fc_minima.setSeconds(0);
-            if(new Date(fc_entrada_servicio) > fc_maxima || new Date(fc_entrada_servicio) < fc_minima){
+            fc_minima.setMinutes(0,0);
+            fc_minima.setSeconds(0,0);
+           
+
+            if( fechaEntradaServicio > fechaEntradaPabellon ){
+                console.log(`fecha entrada servicio: ${ fc_entrada_servicio } < ${fc_entrada_pabellon}`)
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `La entrada al servicio debe ser menor a la fecha de entrada del pabellón`,
+                });
+                this.fc_entrada_servicio = ''
+            }
+            
+            if((new Date(fc_entrada_servicio) > fc_maxima || new Date(fc_entrada_servicio) < fc_minima) ){
+                console.log(`fecha entrada servicio: ${ fc_entrada_servicio } < ${fc_entrada_pabellon} `)
+              
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",

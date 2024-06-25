@@ -13,6 +13,22 @@ class PausaRecuentoGc extends Model
     public $guarded = [];
     public $timestamps = false;
 
+
+    // cambiar por usurio logueado
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($pausaRecuento)
+        {
+            $pausaRecuento->id_responsable = 2590;
+        });
+        
+        static::created(function($pausaRecuento)
+        {
+            $pausaRecuento->id_responsable = 2590;
+        });
+    }
     // Relaciones
     public function pabellonera()
     {
