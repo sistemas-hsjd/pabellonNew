@@ -376,8 +376,9 @@
 import { defineComponent } from 'vue';
 import InfoPaciente from '../paciente/InfoPacienteComponent.vue'
 import Swal from 'sweetalert2';
-import toastr from 'toastr'
-import '../../../assets/css/toastr.css'
+// import '../../../assets/css/toastr.css'
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 export default defineComponent({
     props: {
@@ -464,7 +465,8 @@ export default defineComponent({
                     if(response.data=='ok'){
                         this.limpiar()
                         // $('#modalPausaRecuento').modal('hide')
-                        this.$toastr.success('¡Actualizada!', 'Pausa recuento actualizada correctamente');
+                        // this.$toastr.success('¡Actualizada!', 'Pausa recuento actualizada correctamente');
+                        toastr.success('Pausa recuento actualizada correctamente!');
                     }
                 })
                 .catch(error => {
