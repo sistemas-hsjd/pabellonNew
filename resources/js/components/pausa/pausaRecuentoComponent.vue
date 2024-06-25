@@ -17,10 +17,6 @@
                         <div class="col-md-12">
                             <!-- general form elements -->
                             <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                
-                                </div>
-                        
                                 <div class="card-body">
                                     <div class="card">
                                         <div class="card-body">
@@ -30,6 +26,7 @@
                                         </div>
                                     </div>
 
+                                    <!-- personal -->
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="container">
@@ -37,20 +34,29 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
-                                                            <label for="id_prevencion_caida" class="form-label fw-bold text-primary">Anestesiologo <span class="campo_requerido">*</span></label>
-                                                            <v-select v-model="id_pabellonera_in" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera_in" placeholder="Seleccione Pabellonera..."></v-select>
+                                                            <label for="id_anestesiologo" class="form-label fw-bold text-primary">Anestesiologo <span class="campo_requerido">*</span></label>
+                                                            <v-select v-model="id_anestesiologo" :reduce="anes => anes.pro_cod" :options="anestesiologos" label="nombre" id="id_anestesiologo" placeholder="Seleccione..."></v-select>
+                                                            <div v-for="(item, index) in errores" :key="index">
+                                                                <span class="error" v-if="item.campo=='id_anestesiologo'"> {{ item.mensaje }}</span>  
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
-                                                            <label for="id_prevencion_caida" class="form-label fw-bold text-primary">Arsenalera <span class="campo_requerido">*</span></label>
-                                                            <v-select v-model="id_pabellonera_in" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera_in" placeholder="Seleccione Pabellonera..."></v-select>
+                                                            <label for="id_arsenalera" class="form-label fw-bold text-primary">Arsenalera <span class="campo_requerido">*</span></label>
+                                                            <v-select v-model="id_arsenalera" :reduce="ars => ars.pro_cod" :options="arsenaleras" label="nombre" id="id_arsenalera" placeholder="Seleccione arsenalera.."></v-select>
+                                                            <div v-for="(item, index) in errores" :key="index">
+                                                                <span class="error" v-if="item.campo=='id_arsenalera'"> {{ item.mensaje }}</span>  
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
-                                                            <label for="id_prevencion_caida" class="form-label fw-bold text-primary">Pabellonera <span class="campo_requerido">*</span></label>
-                                                            <v-select v-model="id_pabellonera_in" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera_in" placeholder="Seleccione Pabellonera..."></v-select>
+                                                            <label for="id_pabellonera" class="form-label fw-bold text-primary">Pabellonera <span class="campo_requerido">*</span></label>
+                                                            <v-select v-model="id_pabellonera" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera" placeholder="Seleccione Pabellonera..."></v-select>
+                                                            <div v-for="(item, index) in errores" :key="index">
+                                                                <span class="error" v-if="item.campo=='id_pabellonera'"> {{ item.mensaje }}</span>  
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -58,14 +64,20 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
-                                                            <label for="id_prevencion_caida" class="form-label fw-bold text-primary">Enfermera <span class="campo_requerido">*</span></label>
-                                                            <v-select v-model="id_pabellonera_in" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera_in" placeholder="Seleccione Pabellonera..."></v-select>
+                                                            <label for="id_enfermera" class="form-label fw-bold text-primary">Enfermera <span class="campo_requerido">*</span></label>
+                                                            <v-select v-model="id_enfermera" :reduce="enf => enf.pro_cod" :options="enfermeras" label="nombre" id="id_enfermera" placeholder="Seleccione enfermera..."></v-select>
+                                                            <div v-for="(item, index) in errores" :key="index">
+                                                                <span class="error" v-if="item.campo=='id_enfermera'">{{ item.mensaje }}</span>  
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="mb-3">
-                                                            <label for="id_prevencion_caida" class="form-label fw-bold text-primary">Cirujano <span class="campo_requerido">*</span></label>
-                                                            <v-select v-model="id_pabellonera_in" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera_in" placeholder="Seleccione Pabellonera..."></v-select>
+                                                            <label for="id_cirujano" class="form-label fw-bold text-primary">Cirujano <span class="campo_requerido">*</span></label>
+                                                            <v-select v-model="id_cirujano" :reduce="cirujano => cirujano.pro_cod" :options="cirujanos" label="nombre" id="id_cirujano" placeholder="Seleccione cirujano..."></v-select>
+                                                            <div v-for="(item, index) in errores" :key="index">
+                                                                <span class="error" v-if="item.campo=='id_cirujano'">{{ item.mensaje }}</span>  
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -196,25 +208,37 @@
                                                     <table class="table  table-striped table-hove ">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">N° Sutura</th>
-                                                                <th scope="col">N° Agujas</th>
-                                                                <th scope="col">Total Agujas</th>
-                                                                <th scope="col">Pabellonera</th>
+                                                                <th scope="col">N° Sutura <span class="campo_requerido">*</span></th>
+                                                                <th scope="col">N° Agujas <span class="campo_requerido">*</span></th>
+                                                                <th scope="col">Total Agujas <span class="campo_requerido">*</span></th>
+                                                                <th scope="col">Pabellonera <span class="campo_requerido">*</span></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
                                                                 <td width='10%'>
-                                                                    <input type="number" class="form-control" id="" v-model="nr_recuento_sutura">
+                                                                    <input type="number" class="form-control" id="nr_recuento_sutura" v-model="nr_recuento_sutura">
+                                                                    <div v-for="(item, index) in errores" :key="index">
+                                                                        <span class="error" v-if="item.campo=='nr_recuento_sutura'"> {{ item.mensaje }}</span>  
+                                                                    </div>
                                                                 </td>
                                                                 <td width='10%'>
                                                                     <input type="number" class="form-control" id="nr_recuento_aguja" v-model="nr_recuento_aguja">
+                                                                    <div v-for="(item, index) in errores" :key="index">
+                                                                        <span class="error" v-if="item.campo=='nr_recuento_aguja'"> {{ item.mensaje }}</span>  
+                                                                    </div>
                                                                 </td>
                                                                 <td width='10%'>
                                                                     <input type="number" class="form-control" id="nr_recuento_aguja_total" v-model="nr_recuento_aguja_total">
+                                                                    <div v-for="(item, index) in errores" :key="index">
+                                                                        <span class="error" v-if="item.campo=='nr_recuento_aguja_total'"> {{ item.mensaje }}</span>  
+                                                                    </div>
                                                                 </td>
                                                                 <td width='30%'>
                                                                     <v-select v-model="id_pabellonera_aguja" :reduce="pab => pab.pro_cod" :options="pabelloneras" label="nombre" id="id_pabellonera_aguja" placeholder="Seleccione Pabellonera..."></v-select>
+                                                                    <div v-for="(item, index) in errores" :key="index">
+                                                                        <span class="error" v-if="item.campo=='id_pabellonera_aguja'"> {{ item.mensaje }}</span>  
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -316,15 +340,17 @@
                                     <!-- Observaciones -->
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="mb-3">
-                                                        <label for="gl_observacion" class="form-label fw-bold text-primary">Observaciones</label>
-                                                        <input type="text" class="form-control" id="gl_observacion" v-model="gl_observacion">
+                                            <div class="container">
+                                                <!-- <h5 class="card-subtitle mb-2 fw-bold text-secondary mt-2">Observaciones</h5> -->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="gl_observacion" class="card-subtitle mb-2 fw-bold text-secondary mt-2">Observaciones</label>
+                                                            <textarea v-model="gl_observacion" class="form-control" id="gl_observacion" rows="3"></textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                           
+                                            </div> 
                                         </div>
                                     </div>
                            
@@ -369,6 +395,9 @@ export default defineComponent({
             id_asignacion: '',
             enfermeras: [],
             pabelloneras:[],
+            cirujanos: [],
+            arsenaleras:[],
+            anestesiologos: [],
             solicitudPabellon: [],
             gasasCompresas: [],
             recuentosInstrumntales:[],
@@ -377,6 +406,12 @@ export default defineComponent({
                 { text: 'CVC', value: 'CVC' },
                 { text: 'Linea Arterial', value: 'Linea Arterial' }
             ],
+            // personal
+            id_anestesiologo:'',
+            id_arsenalera:'',
+            id_cirujano: '',
+            id_enfermera:'',
+            id_pabellonera:'',
             // 1 card
             nr_gasa_afuera:'',
             tm_recuento_gc : '',
@@ -406,18 +441,28 @@ export default defineComponent({
     },
     methods: { 
         registrar(){
-
-            if(this.validateForm()){ 
+            if(this.validateForm()){   
                 var data = new FormData();          
                 data.append('id_solicitud', this.id_solicitud) 
                 data.append('id_asignacion', this.id_asignacion)
-                axios.post('/pausaIntro/registrar', data)
+                data.append('bo_borrador', '0')
+                data.append('id_arsenalera', this.id_arsenalera)
+                data.append('id_anestesiologo', this.id_anestesiologo)
+                data.append('id_pabellonera', this.id_pabellonera)
+                data.append('id_enfermera', this.id_enfermera)
+                data.append('id_cirujano', this.id_cirujano)
+                data.append('nr_recuento_sutura', this.nr_recuento_sutura)
+                data.append('nr_recuento_aguja', this.nr_recuento_aguja)
+                data.append('nr_recuento_aguja_total', this.nr_recuento_aguja_total)
+                data.append('id_pabellonera_aguja', this.id_pabellonera_aguja)
+                data.append('gl_observacion', this.gl_observacion)
+    
+                axios.post('/pausaRecuento/registrar', data)
                 .then(response => {
-                    console.log(response.data);
                     if(response.data=='ok'){
                         this.limpiar()
-                        $('#modalPausaIntraOperatoria').modal('hide')
-                        this.$toastr.success('¡Actualizada!', 'Pausa intra operatoria actualizada correctamente');
+                        // $('#modalPausaRecuento').modal('hide')
+                        this.$toastr.success('¡Actualizada!', 'Pausa recuento actualizada correctamente');
                     }
                 })
                 .catch(error => {
@@ -427,10 +472,32 @@ export default defineComponent({
         },
         validateForm() {
             this.errores = []; 
-            if (this.isRequired) {
-                // if (this.gl_antiseptico == '' || this.gl_antiseptico == null) {
-                //     this.errores.push({ campo: 'gl_antiseptico', mensaje: 'El campo antiséptico es requerido.' });
-                // }
+            if (this.id_anestesiologo == '' || this.id_anestesiologo == null) {
+                this.errores.push({ campo: 'id_anestesiologo', mensaje: 'El campo anestesiologo es requerido.' });
+            }
+            if (this.id_arsenalera == '' || this.id_arsenalera == null) {
+                this.errores.push({ campo: 'id_arsenalera', mensaje: 'El campo arsenalera es requerido.' });
+            }
+            if (this.id_cirujano == '' || this.id_cirujano == null) {
+                this.errores.push({ campo: 'id_cirujano', mensaje: 'El campo cirujano es requerido.' });
+            }
+            if (this.id_enfermera == '' || this.id_enfermera == null) {
+                this.errores.push({ campo: 'id_enfermera', mensaje: 'El campo enfermera es requerido.' });
+            }
+            if (this.id_pabellonera == '' || this.id_pabellonera == null) {
+                this.errores.push({ campo: 'id_pabellonera', mensaje: 'El campo pabellonera es requerido.' });
+            }
+            if (this.nr_recuento_aguja == '') {
+                this.errores.push({ campo: 'nr_recuento_aguja', mensaje: 'El campo es requerido.' });
+            }
+            if (this.nr_recuento_sutura == '') {
+                this.errores.push({ campo: 'nr_recuento_sutura', mensaje: 'El campo es requerido.' });
+            }
+            if (this.nr_recuento_aguja_total == '') {
+                this.errores.push({ campo: 'nr_recuento_aguja_total', mensaje: 'El campo es requerido.' });
+            }
+            if (this.id_pabellonera_aguja == '' || this.id_pabellonera_aguja == null) {
+                this.errores.push({ campo: 'id_pabellonera_aguja', mensaje: 'El campo pabellonera es requerido.' });
             }
             return this.errores.length === 0;
         },
@@ -443,7 +510,19 @@ export default defineComponent({
             axios.post('/pausaRecuento/get-info', data)
             .then(response => {
                 const { anestesiologos, arsenaleras, cirujanos, enfermeras, pabelloneras, solicitudPabellon } = response.data  
-                console.log(solicitudPabellon)
+                console.log( solicitudPabellon.pausa_recuento )
+                this.enfermeras = enfermeras
+                this.cirujanos = cirujanos
+                this.arsenaleras = arsenaleras
+                this.anestesiologos = anestesiologos
+
+                this.id_anestesiologo = solicitudPabellon.pausa_recuento.id_anestesiologo
+                this.id_arsenalera = solicitudPabellon.pausa_recuento.id_arsenalera
+                this.id_asignacion = solicitudPabellon.pausa_recuento.id_asignacion
+                this.id_cirujano = solicitudPabellon.pausa_recuento.id_cirujano
+                this.id_enfermera = solicitudPabellon.pausa_recuento.id_enfermera
+                this.id_pabellonera = solicitudPabellon.pausa_recuento.id_pabellonera
+            
                 this.id_solicitud = solicitud_id
                 this.pabelloneras = pabelloneras
                 this.id_asignacion = solicitudPabellon.asignacion.id
@@ -576,8 +655,19 @@ export default defineComponent({
             .catch(error => {   
                 console.error('Error: ', error);
             });
+        },
+        limpiar(){
+            this.id_anestesiologo = ''
+            this.id_pabellonera = ''
+            this.id_enfermera = ''
+            this.id_cirujano = ''
+            this.nr_recuento_sutura = ''
+            this.nr_recuento_aguja = ''
+            this.nr_recuento_aguja_total = ''
+            this.id_pabellonera_aguja = ''
+            this.gl_observacion = ''
+            this.id_arsenalera = ''
         }
-
     }, 
     computed:{
     },

@@ -125,4 +125,5 @@ Route::prefix('pausaRecuento')->group(function () {
     Route::post('/registrar-recuento-gasa', [PausaRecuentoController::class, 'agregarGasasCompresas']);
     Route::post('/registrar-instrumental', [PausaRecuentoController::class, 'agregarInstrumental']);
     Route::post('/eliminar-instrumental', [PausaRecuentoController::class, 'eliminarRecuentoInstrumental']); 
+    Route::post('/registrar', [PausaRecuentoController::class, 'store']);
 });

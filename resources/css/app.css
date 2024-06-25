@@ -42,4 +42,10 @@
     font-size: 1.1em;
     font-weight: bold;
 }
+
+.error {
+    color:red;
+    font-size: .83em;
+    font-weight: 800;
+}
  

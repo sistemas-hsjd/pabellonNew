@@ -733,7 +733,6 @@ export default defineComponent({
            
 
             if( fechaEntradaServicio > fechaEntradaPabellon ){
-                console.log(`fecha entrada servicio: ${ fc_entrada_servicio } < ${fc_entrada_pabellon}`)
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",

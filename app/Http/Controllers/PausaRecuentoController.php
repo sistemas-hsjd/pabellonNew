@@ -12,6 +12,33 @@ use Illuminate\Http\Request;
 
 class PausaRecuentoController extends Controller
 {
+
+    public function store(Request $request)
+    {
+        $recuentoRequest = [
+            'id_solicitud'=> request()->id_solicitud,
+            'id_asignacion'=> request()->id_asignacion,
+            'bo_borrador'=> request()->bo_borrador,
+            'id_anestesiologo'=> request()->id_anestesiologo,
+            'id_arsenalera'=> request()->id_arsenalera,
+            'id_pabellonera'=> request()->id_pabellonera,
+            'id_enfermera'=> request()->id_enfermera,
+            'id_cirujano'=> request()->id_cirujano,
+            'nr_recuento_sutura'=> request()->nr_recuento_sutura,
+            'nr_recuento_aguja'=> request()->nr_recuento_aguja,
+            'nr_recuento_aguja_total'=> request()->nr_recuento_aguja_total,
+            'id_pabellonera_aguja'=> request()->id_pabellonera_aguja,
+            'gl_observacion'=> request()->gl_observacion
+        ];
+
+        $pausaRecuento = PausaRecuento::updateOrCreate(['id_solicitud' => $request->id_solicitud], $recuentoRequest);
+        if($pausaRecuento){
+            return 'ok';
+        }else{
+            return 'error';
+        }
+    }
+
     public function getInfo(Request $request){
         $pausaRecuento = PausaRecuento::find($request->id);
         $solicitudPabellon = SolicitudPabellon::with('paciente', 'asignacion', 'pausaRecuento')
@@ -82,6 +109,7 @@ class PausaRecuentoController extends Controller
            'error';
         }   
     }
+
     public function getGasasCompresas(Request $request){
         $gasasCompresas = PausaRecuentoGc::with('pabellonera')->where('id_solicitud', $request->id_solicitud)->get();
         return $gasasCompresas;
@@ -96,6 +124,7 @@ class PausaRecuentoController extends Controller
             return 'error';
         }
     }
+
     public function agregarGasasCompresas(Request $request)
     {
         $gasasCompresas = PausaRecuentoGc::create($request->all());
@@ -123,5 +152,4 @@ class PausaRecuentoController extends Controller
             return 'error';
        }
     }
-
 }
