@@ -1,4 +1,5 @@
 import './bootstrap';
+import 'toastr/build/toastr.min.css';
 import  VueSelect from "vue-select";
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import toastr from 'toastr'
