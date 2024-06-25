@@ -376,7 +376,7 @@
 import { defineComponent } from 'vue';
 import InfoPaciente from '../paciente/InfoPacienteComponent.vue'
 import Swal from 'sweetalert2';
-import 'toastr/build/toastr.css'
+
 export default defineComponent({
     props: {
         paciente: {

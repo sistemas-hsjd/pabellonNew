@@ -8,12 +8,13 @@ import axios from 'axios';
 window.axios = axios;
 import $ from 'jquery';
 window.jQuery = window.$ = $;
+import toastr from 'toastr'
 import 'vue-select/dist/vue-select.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../assets/css/google-fonts.css';
 import '../assets/css/adminlte.css';
 import '../assets/css/estilos.css';
-// import 'toastr/build/toastr.css'
+import 'toastr/build/toastr.css'
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
