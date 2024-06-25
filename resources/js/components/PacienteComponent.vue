@@ -269,7 +269,6 @@ import ModalPaciente from './ModalPacienteComponent.vue';
 import ModalConsentimiento from './ModalConsentimiento.vue';
 
 
-
 import Swal from 'sweetalert2';
 export default defineComponent({
     components: {
