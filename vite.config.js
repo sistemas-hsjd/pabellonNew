@@ -9,7 +9,7 @@ export default defineConfig({
                 'resources/assets/css/all.min.css', 
                 'resources/assets/css/adminlte.css', 
                 'resources/assets/css/ionicons.min.css',
-                'resources/assets/css/select2-bootstrap-5-theme.min.css',
+                // 'resources/assets/css/select2-bootstrap-5-theme.min.css',
                 'resources/assets/js/adminlte.js', 
                 // 'resources/assets/js/OverlayScrollbars.min.js', 
                 // 'resources/assets/js/bootstrap.bundle.min.js', 
@@ -27,11 +27,6 @@ export default defineConfig({
                 },
             }
         }),
-    ],
-    resolve: {
-        alias: {
-            '@': '/resources/js',
-        },
-    },
+    ]
    
 });
